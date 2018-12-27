@@ -1,0 +1,1 @@
+class HotelsError < StandardError; end
