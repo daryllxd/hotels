@@ -21,7 +21,7 @@ module Importers
         end
 
         def call
-          find_column_value_matches.compact
+          find_column_value_matches.compact.uniq
         end
 
         private
@@ -42,15 +42,19 @@ module Importers
         def find_match_from_possible_values(potential_value)
           possible_values.detect do |possible_value|
             if possible_value.is_a?(String)
-              Levenshtein.distance(possible_value, potential_value) < 2
+              levenshtein_match?(potential_value, possible_value)
             else
               matched_value, value_synonyms = possible_value
 
               value_synonyms.detect do |value_synonym|
-                return matched_value if Levenshtein.distance(value_synonym, potential_value) < 2
+                return matched_value if levenshtein_match?(potential_value, value_synonym)
               end
             end
           end
+        end
+
+        def levenshtein_match?(potential, possible)
+          Levenshtein.distance(possible.downcase, potential.downcase) < 2
         end
       end
     end

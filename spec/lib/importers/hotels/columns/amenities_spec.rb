@@ -30,6 +30,12 @@ RSpec.describe Importers::Hotels::Columns::Amenities do
 
         expect(transformed_value).to eq([])
       end
+
+      it 'removes duplicates' do
+        transformed_value = described_class.new(%w[bathtub tub]).transformed_value
+
+        expect(transformed_value).to eq(['bathtub'])
+      end
     end
 
     context 'value is given as a hash' do
