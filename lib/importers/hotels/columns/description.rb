@@ -6,6 +6,10 @@ module Importers
   module Hotels
     module Columns
       class Description < Base
+        def self.column_mappings
+          super + %w[details]
+        end
+
         def transformed_value
           value.strip
         end
