@@ -3,6 +3,12 @@
 require './lib/importers/hotels/columns/facilities'
 
 RSpec.describe Importers::Hotels::Columns::Facilities do
+  describe '.column_mappings' do
+    it 'contains "amenities" and "facilities"' do
+      expect(described_class.column_mappings).to match_array(%w[facilities amenities])
+    end
+  end
+
   describe '#transformed_value' do
     context 'value is given as an array' do
       it 'iterates through the array and matches valid facilities via a Levenshtein match' do

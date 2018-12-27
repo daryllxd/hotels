@@ -7,6 +7,10 @@ module Importers
   module Hotels
     module Columns
       class Facilities < Base
+        def self.column_mappings
+          super + %w[amenities]
+        end
+
         ALL_FACILITIES = [
           ['outdoor pool', %w[pool outdoor_pool]],
           'indoor pool',
