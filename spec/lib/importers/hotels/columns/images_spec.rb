@@ -38,6 +38,27 @@ RSpec.describe Importers::Hotels::Columns::Images do
       )
     end
 
+    it 'converts all keys with "url" to "link"' do
+      sample_input = {
+        rooms: [
+          {
+            'url' => 'https://d2ey9sqrvkqdfs.cloudfront.net/0qZF/2.jpg',
+            'caption' => 'Room'
+          }
+        ]
+      }
+      output = described_class.new(sample_input).transformed_value
+
+      expect(output).to eq(
+        rooms: [
+          {
+            'link' => 'https://d2ey9sqrvkqdfs.cloudfront.net/0qZF/2.jpg',
+            'caption' => 'Room'
+          }
+        ]
+      )
+    end
+
     it 'raises an error if its not a Hash' do
       expect { described_class.new(nil).transformed_value }
         .to raise_error(HotelsError).with_message('Invalid images, must be a hash')

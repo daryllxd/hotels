@@ -20,7 +20,7 @@ module Importers
 
         def cleanup_image(image)
           {
-            'link' => image['link'],
+            'link' => image['link'] || image['url'],
             'caption' => image['caption'].strip
           }
         end
