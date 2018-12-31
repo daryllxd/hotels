@@ -21,8 +21,12 @@ module Importers
         def cleanup_image(image)
           {
             'link' => image['link'] || image['url'],
-            'caption' => image['caption'].strip
+            'description' => image_description(image)
           }
+        end
+
+        def image_description(image)
+          (image['description'] || image['caption'] || '').strip
         end
       end
     end
