@@ -48,7 +48,7 @@ module Importers
 
         def find_in_something(column_key, column_klass)
           column_klass.lookup_mappings.detect do |lookup_mapping|
-            found_value_in_lookup = json_hash[lookup_mapping][column_key]
+            found_value_in_lookup = json_hash.fetch(lookup_mapping) { {} }[column_key]
             return column_klass.new(found_value_in_lookup).transformed_value if found_value_in_lookup
           end
         end
