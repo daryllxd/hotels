@@ -38,7 +38,7 @@ group :development, :test do
 end
 
 group :development do
-  gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'listen', '>= 3.0.5', '< 3.5'
 
   gem 'spring'
   gem 'spring-commands-rspec'
